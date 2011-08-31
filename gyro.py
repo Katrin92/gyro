@@ -15,12 +15,13 @@ class GyroApp(ShowBase):
         self.player = Player()
         self.physics = Physics()
 
-        self.graphics.camera_target = self.player.model
+        self.graphics.camera_target = (0, 0, 0)
         self.environment.spotlight_target = self.player.model
+
+        self.player.model.setPos(-5, 0, 1)
 
         self.environment.enable_physics(self.physics)
         self.player.enable_physics(self.physics)
-
 
 if __name__ == '__main__':
     app = GyroApp()

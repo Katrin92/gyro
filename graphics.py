@@ -1,4 +1,5 @@
 from panda3d.core import AntialiasAttrib
+from pandac.PandaModules import WindowProperties
 
 class Graphics:
 
@@ -8,6 +9,9 @@ class Graphics:
 
     def _init_graphics(self):
         base.disableMouse()
+        props = WindowProperties()
+        props.setCursorHidden(True)
+        base.win.requestProperties(props)
         base.setFrameRateMeter(True)
         render.setShaderAuto()
         render.setAntialias(AntialiasAttrib.MAuto)
@@ -18,6 +22,6 @@ class Graphics:
         taskMgr.add(self._camera_task, "Camera")
 
     def _camera_task(self, task):
-        base.camera.setPos(0, -10, 15)
+        base.camera.setPos(0, -30, 20)
         base.camera.lookAt(self.camera_target)
         return task.cont
