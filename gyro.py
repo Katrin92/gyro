@@ -1,8 +1,9 @@
 from direct.showbase.ShowBase import ShowBase
 
 from graphics import Graphics
-from player import Player
 from environment import Environment
+from level import Level
+from player import Player
 from physics import Physics
 
 class GyroApp(ShowBase):
@@ -12,16 +13,20 @@ class GyroApp(ShowBase):
 
         self.graphics = Graphics()
         self.environment = Environment()
+        self.level = Level()
         self.player = Player()
         self.physics = Physics()
 
-        self.graphics.camera_target = (0, 0, 0)
+        self.graphics.camera_target = (0, 0, -1)
         self.environment.spotlight_target = self.player.model
 
-        self.player.model.setPos(-5, 0, 1)
+        self.player.model.setPos(-10, 0, 1)
 
-        self.environment.enable_physics(self.physics)
+        self.level.enable_physics(self.physics)
         self.player.enable_physics(self.physics)
+        
+        self.accept("space", self.player.reset)
+
 
 if __name__ == '__main__':
     app = GyroApp()

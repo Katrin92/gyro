@@ -17,9 +17,9 @@ class Player:
 
     def enable_physics(self, physics):
         self.body = OdeBody(physics.world)
-        self.body.setPosition(self.model.getPos(render))
-        self.body.setQuaternion(self.model.getQuat(render))
-        self.body.setAngularVel(0, 0, 30)
+        self.initial_position = self.model.getPos(render)
+        self.initial_quaternion = self.model.getQuat(render)
+        self.reset()
 
         mass = OdeMass()
         mass.setCylinder(10, 2, 1.2, 0.2)
@@ -30,3 +30,10 @@ class Player:
         modelGeom.setBody(self.body)
 
         physics.bodymodels[self.body] = self.model
+        
+        
+    def reset(self):
+        self.body.setPosition(self.initial_position)
+        self.body.setQuaternion(self.initial_quaternion)
+        self.body.setAngularVel(0, 0, 20)
+        self.body.setLinearVel(0, 0, 3)
