@@ -2,9 +2,10 @@ from direct.showbase.ShowBase import ShowBase
 
 from graphics import Graphics
 from environment import Environment
-from level import Level
 from player import Player
 from physics import Physics
+
+import testlevels
 
 class GyroApp(ShowBase):
 
@@ -13,7 +14,7 @@ class GyroApp(ShowBase):
 
         self.graphics = Graphics()
         self.environment = Environment()
-        self.level = Level()
+        self.level = testlevels.SimpleBridgeLevel()
         self.player = Player()
         self.physics = Physics()
 
