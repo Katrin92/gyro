@@ -35,5 +35,5 @@ class Player:
     def reset(self):
         self.body.setPosition(self.initial_position)
         self.body.setQuaternion(self.initial_quaternion)
-        self.body.setAngularVel(0, 0, 20)
-        self.body.setLinearVel(0, 0, 3)
+        self.body.setAngularVel(0, 0, 35)
+        self.body.setLinearVel(0, 0, 0)

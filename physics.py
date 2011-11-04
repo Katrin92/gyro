@@ -11,7 +11,7 @@ class Physics:
         self.world = OdeWorld()
         self.world.setGravity(0, 0, -9.81)
         self.world.initSurfaceTable(1)
-        self.world.setSurfaceEntry(0, 0, 0.3, 0.5, 0.0, 0.9, 0.00001, 0.0, 0.002)
+        self.world.setSurfaceEntry(0, 0, 3.0, 0.5, 0.0, 0.9, 0.00001, 0.0, 0.002)
 
     def _init_collision(self):
         self.space = OdeSimpleSpace()

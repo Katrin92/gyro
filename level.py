@@ -13,10 +13,7 @@ class Level:
 
     def _init_mouse(self):
         taskMgr.add(self._mouse_task, "MouseTask")
-        self.smooth_x = 0
-        self.smooth_y = 0
-        self.mouse_x = 0
-        self.mouse_y = 0    
+        self.reset()
         
     def _mouse_task(self, task):
         if base.mouseWatcherNode.hasMouse():
@@ -46,3 +43,9 @@ class Level:
     def enable_physics(self, physics):
         for plate in self.plates:
             plate.enable_physics(physics)
+            
+    def reset(self):
+        self.smooth_x = 0
+        self.smooth_y = 0
+        self.mouse_x = 0
+        self.mouse_y = 0  
