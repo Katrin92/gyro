@@ -12,7 +12,7 @@ class ObstacleWall(Level):
         self._init_obstacles()
 
     def _init_plates(self):
-        self.objects = [Plate(self,    -9,  0,     -.5,  5.5,  4),
+        self.objects = [Plate(self,    -9,  0,     -.3,  5.5,  4),
                         Plate(self, -5.75,  0, self._h,    1, 10),
                         Plate(self,  -2.5,  0,    -1.5,  5.5,  6)]
 

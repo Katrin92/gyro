@@ -18,7 +18,7 @@ class Obstacle:
         self.body.setQuaternion(self.model.getQuat(render))
 
         mass = OdeMass()
-        mass.setBox(1, 1, 1, 0.1)
+        mass.setBox(1, 1, 1, 0.2)
         self.body.setMass(mass)
 
         self.geom = OdeBoxGeom(physics.space, 1, 1, 1)

@@ -56,14 +56,10 @@ class Player:
 
         avel = self.body.getAngularVel()
 
-        self.f = max(self.f, (1/(abs(avel.z/500)+1)))
+        self.calculate_factor(avel.z)
 
-        f = self.f
-        print "Energy:", max(0, round((0.99-f)*1000,1))
-
-        if f > 0.99:
+        if self.factor > 0.99:
             return
-
 
         if on_plate:
             if self.controls.jump:
@@ -79,18 +75,25 @@ class Player:
                            0)
 
         hpr = self.model.getHpr()
-        self.model.setHpr(hpr.x, f*hpr.y, f*hpr.z)
+        self.model.setHpr(hpr.x, self.factor*hpr.y, self.factor*hpr.z)
         self.body.setQuaternion(self.model.getQuat(render))
 
-        self.body.setAngularVel(f*avel.x, f*avel.y, avel.z)
+        self.body.setAngularVel(self.factor*avel.x,
+                                self.factor*avel.y,
+                                avel.z)
 
+    def calculate_factor(self, spin_velocity):
+        self.factor = max(self.factor, (1/(abs(spin_velocity/500.0)+1)))
+        self.health = max(0, round((0.99-self.factor)*1000,1))
 
     def reset(self):
+        initial_spin_velocity = 50
         self.body.setPosition(self.initial_position)
         self.body.setQuaternion(self.initial_quaternion)
         self.body.setLinearVel(0, 0, 0)
-        self.body.setAngularVel(0, 0, 50)
-        self.f = 0
+        self.body.setAngularVel(0, 0, initial_spin_velocity)
+        self.factor = 0
+        self.calculate_factor(initial_spin_velocity)
 
 
 class Controls:
