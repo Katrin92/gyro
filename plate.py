@@ -2,7 +2,7 @@ from pandac.PandaModules import OdeBoxGeom, Vec3
 
 class Plate:
 
-    def __init__(self, level, x, y, z, width, height):
+    def __init__(self, x, y, z, width, height):
 
         self.model = loader.loadModel("cube")
         self.model.reparentTo(render)
@@ -12,7 +12,6 @@ class Plate:
         self.model.setColor(0.7, 0.3, 0.1, 1)
         self.model.setTexture(loader.loadTexture('texture.png'))
 
-        self.level = level
         self.width = width
         self.height = height
 

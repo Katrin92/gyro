@@ -19,7 +19,8 @@ class GyroApp(ShowBase):
         self.physics = Physics()
 
         #self.level = testlevels.SimpleBridge()
-        self.level = testlevels.ObstacleWall()
+        #self.level = testlevels.ObstacleWall()
+        self.level = testlevels.Staircase()
         self.level.enable_physics(self.physics)
 
         self.player = Player(self.level)
