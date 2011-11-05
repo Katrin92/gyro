@@ -64,15 +64,19 @@ class Player:
         if f > 0.99:
             return
 
-        if on_plate:
-            self.body.addForce(self.controls.direction[1]*350,
-                               -self.controls.direction[0]*350,
-                               0)
 
+        if on_plate:
             if self.controls.jump:
                 vel = self.body.getLinearVel()
                 self.body.setLinearVel(vel.x, vel.y, vel.z + 5)
                 self.controls.jump = False
+            force = 350
+        else:
+            force = 25
+
+        self.body.addForce(self.controls.y*force,
+                           -0.8*self.controls.x*force,
+                           0)
 
         hpr = self.model.getHpr()
         self.model.setHpr(hpr.x, f*hpr.y, f*hpr.z)
@@ -95,36 +99,31 @@ class Controls:
         self.stop()
 
         base.accept('a', self.goLeft)
-        base.accept('a-up', self.stop)
+        base.accept('a-up', self.goRight)
         base.accept('d', self.goRight)
-        base.accept('d-up', self.stop)
+        base.accept('d-up', self.goLeft)
         base.accept('w', self.goUp)
-        base.accept('w-up', self.stop)
+        base.accept('w-up', self.goDown)
         base.accept('s', self.goDown)
-        base.accept('s-up', self.stop)
+        base.accept('s-up', self.goUp)
 
         base.accept('space', self.jump)
         self.jump = False
 
-        base.accept('collision', self._handle_collision)
-
     def goLeft(self):
-        self.direction = (-1, 0)
+        self.x -= 1
 
     def goRight(self):
-        self.direction = (1, 0)
+        self.x += 1
 
     def goUp(self):
-        self.direction = (0, 1)
+        self.y += 1
 
     def goDown(self):
-        self.direction = (0, -1)
+        self.y -= 1
 
     def stop(self):
-        self.direction = (0, 0)
+        self.x, self.y = 0, 0
 
     def jump(self):
         self.jump = True
-
-    def _handle_collision(self, entry):
-        pass
