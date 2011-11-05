@@ -14,23 +14,23 @@ class GyroApp(ShowBase):
 
         self.graphics = Graphics()
         self.environment = Environment()
-        self.level = testlevels.SimpleBridgeLevel()
-        self.player = Player()
         self.physics = Physics()
+
+        #self.level = testlevels.SimpleBridge()
+        self.level = testlevels.ObstacleWall()
+        self.level.enable_physics(self.physics)
+
+        self.player = Player(self.level)
+        self.player.model.setPos(-10, 0, 1)
+        self.player.enable_physics(self.physics)
 
         self.graphics.camera_target = self.player.model
         self.environment.spotlight_target = self.player.model
 
-        self.player.model.setPos(-10, 0, 1)
+        self.accept("escape", self.reset)
 
-        self.level.enable_physics(self.physics)
-        self.player.enable_physics(self.physics)
-        
-        self.accept("space", self.reset)
-    
     def reset(self):
         self.player.reset()
-        self.level.reset()
 
 if __name__ == '__main__':
     app = GyroApp()

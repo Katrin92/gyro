@@ -12,9 +12,9 @@ class Environment:
         self.sky = loader.loadModel("sky")
         self.sky.setScale(10)
         self.sky.reparentTo(render)
-        self.sky.setTexture(loader.loadTexture('gradient.png'))        
+        self.sky.setTexture(loader.loadTexture('gradient.png'))
         self.sky.setBin('background', 0)
-        self.sky.setDepthWrite(False) 
+        self.sky.setDepthWrite(False)
         self.sky.setShaderOff()
         self.sky.setLightOff()
 
@@ -34,13 +34,9 @@ class Environment:
 
         self.spotlight_target = (0, 0, 0)
         taskMgr.add(self._spotlight_task, "SpotlightTask")
-        
+
 
     def _spotlight_task(self, task):
         self.spotlight.setPos(0, 0, 20)
         self.spotlight.lookAt(self.spotlight_target)
         return task.cont
-
-
-                                         
-                                         

@@ -22,7 +22,7 @@ class Graphics:
         taskMgr.add(self._camera_task, "Camera")
 
     def _camera_task(self, task):
-        move = self.camera_target.getPos() + Vec3(0, -10, 3) - base.camera.getPos()
+        move = self.camera_target.getPos() + Vec3(-10, 0, 3) - base.camera.getPos()
         base.camera.setPos(base.camera.getPos() + move * globalClock.getDt() * .5)
         base.camera.lookAt(self.camera_target)
         return task.cont
