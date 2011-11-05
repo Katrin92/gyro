@@ -19,4 +19,6 @@ class ObstacleWall(Level):
     def _init_obstacles(self):
         for z in range(5):
             for y in range(5 - z):
-                self.objects.append(Obstacle(-5.75, -2.4 + y*1.2 + 0.6*z, z + 0.6 + self._h))
+                self.objects.append(Obstacle(-5.75,
+                                             -2.4 + y*1.2 + 0.6*z,
+                                             z + 0.6 + self._h))

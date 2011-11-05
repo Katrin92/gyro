@@ -71,9 +71,10 @@ class Player:
 
         self.controls.jump = False
 
-        self.body.addForce(self.controls.y*force,
-                           -0.8*self.controls.x*force,
-                           0)
+        self.body.addForce(Mat3.rotateMat(self.controls.view_rotation).xform(
+                           (self.controls.y*force,
+                            -0.8*self.controls.x*force,
+                            0)))
 
         hpr = self.model.getHpr()
         self.model.setHpr(hpr.x, self.factor*hpr.y, self.factor*hpr.z)
@@ -100,34 +101,41 @@ class Player:
 class Controls:
 
     def __init__(self):
-        self.stop()
 
-        base.accept('a', self.goLeft)
-        base.accept('a-up', self.goRight)
-        base.accept('d', self.goRight)
-        base.accept('d-up', self.goLeft)
-        base.accept('w', self.goUp)
-        base.accept('w-up', self.goDown)
-        base.accept('s', self.goDown)
-        base.accept('s-up', self.goUp)
+        base.accept('a', self.go_left)
+        base.accept('a-up', self.go_right)
+        base.accept('d', self.go_right)
+        base.accept('d-up', self.go_left)
+        base.accept('w', self.go_up)
+        base.accept('w-up', self.go_down)
+        base.accept('s', self.go_down)
+        base.accept('s-up', self.go_up)
+        self.x, self.y = 0, 0
+
+        base.accept('arrow_left', self.view_left)
+        base.accept('arrow_right', self.view_right)
+        self.view_rotation = 0
 
         base.accept('space', self.jump)
         self.jump = False
 
-    def goLeft(self):
+    def go_left(self):
         self.x -= 1
 
-    def goRight(self):
+    def go_right(self):
         self.x += 1
 
-    def goUp(self):
+    def go_up(self):
         self.y += 1
 
-    def goDown(self):
+    def go_down(self):
         self.y -= 1
 
-    def stop(self):
-        self.x, self.y = 0, 0
+    def view_left(self):
+        self.view_rotation += 90
+
+    def view_right(self):
+        self.view_rotation -= 90
 
     def jump(self):
         self.jump = True

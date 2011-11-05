@@ -26,7 +26,7 @@ class GyroApp(ShowBase):
         self.player.model.setPos(-10, 0, 1)
         self.player.enable_physics(self.physics)
 
-        self.graphics.camera_target = self.player.model
+        self.graphics.camera_target = self.player
         self.environment.spotlight_target = self.player.model
 
         self.health_bar = DirectWaitBar(pos = (0, 0, -0.9), scale = 0.5,
