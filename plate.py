@@ -20,3 +20,6 @@ class Plate:
         self.geom = OdeBoxGeom(physics.space, self.width, self.height, 0.2)
         self.geom.setPosition(self.model.getPos())
         self.geom.setQuaternion(self.model.getQuat())
+
+    def reset(self):
+        pass

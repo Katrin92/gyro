@@ -13,11 +13,12 @@ class Staircase(Level):
 
     def _init_plates(self):
         self.objects = []
-        for z in range(18):
+        for z in range(19):
             plate = Plate(-10.0 * math.cos(z*math.pi/9),
                           10.0 * math.sin(z*math.pi/9),
                           -0.3 + z * 0.5,  3,  3)
             self.objects.append(plate)
+        self.objects.append(Plate(-10, 5, 9, 5, 5))
 
     def _init_obstacles(self):
         for z in range(9):

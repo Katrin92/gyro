@@ -47,6 +47,8 @@ class GyroApp(ShowBase):
 
     def reset(self):
         self.player.reset()
+        for level_object in self.level.objects:
+            level_object.reset()
 
 if __name__ == '__main__':
     app = GyroApp()
