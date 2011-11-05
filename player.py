@@ -41,6 +41,7 @@ class Player:
         physics.bodymodels[self.body] = self.model
 
         physics.actions.append(self._player_controls)
+        self.exponent = 1000 * physics.step_size
 
 
     def _player_controls(self):
@@ -61,6 +62,8 @@ class Player:
         if self.factor > 0.99:
             return
 
+        f = self.factor**self.exponent
+
         if on_plate:
             if self.controls.jump:
                 vel = self.body.getLinearVel()
@@ -77,11 +80,11 @@ class Player:
                             0)))
 
         hpr = self.model.getHpr()
-        self.model.setHpr(hpr.x, self.factor*hpr.y, self.factor*hpr.z)
+        self.model.setHpr(hpr.x, f*hpr.y, f*hpr.z)
         self.body.setQuaternion(self.model.getQuat(render))
 
-        self.body.setAngularVel(self.factor*avel.x,
-                                self.factor*avel.y,
+        self.body.setAngularVel(f*avel.x,
+                                f*avel.y,
                                 avel.z)
 
     def calculate_factor(self, spin_velocity):

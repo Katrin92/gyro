@@ -22,18 +22,18 @@ class Physics:
     def _init_simulation(self):
         self.bodymodels = {}
         self.actions = []
-        self.stepSize = 1.0 / 1000.0
+        self.step_size = 1.0 / 100.0
         self.deltaTimeAccumulator = 0
         taskMgr.doMethodLater(1.0, self._simulation_task, "Physics")
 
     def _simulation_task(self, task):
         self.deltaTimeAccumulator += globalClock.getDt()
-        while self.deltaTimeAccumulator > self.stepSize:
-            self.deltaTimeAccumulator -= self.stepSize
+        while self.deltaTimeAccumulator > self.step_size:
+            self.deltaTimeAccumulator -= self.step_size
             for action in self.actions:
                 action()
             self.space.autoCollide()
-            self.world.quickStep(self.stepSize)
+            self.world.quickStep(self.step_size)
             for body in self.bodymodels:
                 self.bodymodels[body].setPosQuat(render, body.getPosition(),
                                                  Quat(body.getQuaternion()))
