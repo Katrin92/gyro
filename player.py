@@ -65,10 +65,11 @@ class Player:
             if self.controls.jump:
                 vel = self.body.getLinearVel()
                 self.body.setLinearVel(vel.x, vel.y, vel.z + 5)
-                self.controls.jump = False
             force = 350
         else:
             force = 25
+
+        self.controls.jump = False
 
         self.body.addForce(self.controls.y*force,
                            -0.8*self.controls.x*force,
