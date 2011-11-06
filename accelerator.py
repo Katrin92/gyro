@@ -35,11 +35,14 @@ class Accelerator:
         self.geom = OdeCylinderGeom(physics.space, 1.5, 0.1)
         self.geom.setPosition(self.model.getPos())
         self.geom.setQuaternion(self.model.getQuat())
+        physics.actions.append(self._deactivate)
+
+    def _deactivate(self):
+        self._active = False
 
     def _update_task(self, task):
         if self._active:
             self.visibility = min(1, self.visibility + globalClock.getDt())
-            self._active = False
         else:
             self.visibility = max(0, self.visibility - globalClock.getDt()*2)
         self.glow.setAlphaScale(self.visibility)
