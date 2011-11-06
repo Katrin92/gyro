@@ -19,7 +19,7 @@ class Obstacle:
         self.reset()
 
         mass = OdeMass()
-        mass.setBox(1, 1, 1, 0.2)
+        mass.setBox(0.2, 1, 1, 1)
         self.body.setMass(mass)
 
         self.geom = OdeBoxGeom(physics.space, 1, 1, 1)
