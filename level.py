@@ -6,3 +6,7 @@ class Level:
     def enable_physics(self, physics):
         for level_object in self.objects:
             level_object.enable_physics(physics)
+
+    def reset(self):
+        for level_object in self.objects:
+            level_object.reset()
