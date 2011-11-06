@@ -4,7 +4,7 @@ from pandac.PandaModules import OdeTriMeshData, OdeTriMeshGeom
 
 import math
 
-from plate import Plate
+from accelerator import Accelerator
 
 class Player:
 
@@ -19,7 +19,7 @@ class Player:
         self.model.setPos(0, 0, 2)
         self.model.setHpr(0, 0, 0)
         self.model.setColor(0.1, 0.7, 0.7, 1)
-        self.model.setTexture(loader.loadTexture('texture.png'))
+        self.model.setTexture(loader.loadTexture('textures/texture.png'))
 
     def _init_controls(self):
         self.controls = Controls()
@@ -28,6 +28,7 @@ class Player:
         self.body = OdeBody(physics.world)
         self.initial_position = self.model.getPos(render)
         self.initial_quaternion = self.model.getQuat(render)
+        self.initial_spin_velocity = 50
         self.reset()
 
         mass = OdeMass()
@@ -46,16 +47,23 @@ class Player:
 
     def _player_controls(self):
 
-        on_plate = False
+        avel = self.body.getAngularVel()
 
+        on_plate = False
+        accelerate = False
 
         for level_object in self.level.objects:
             collide = OdeUtil.collide(level_object.geom, self.geom)
             if collide:
                 on_plate = True
+                if avel.z < self.initial_spin_velocity and \
+                   isinstance(level_object, Accelerator):
+                    accelerate = level_object.player_interact(self)
                 break
 
-        avel = self.body.getAngularVel()
+        if accelerate:
+            avel.z += self.exponent / 200.0
+            self.factor = 0
 
         self.calculate_factor(avel.z)
 
@@ -92,13 +100,12 @@ class Player:
         self.health = max(0, round((0.99-self.factor)*1000,1))
 
     def reset(self):
-        initial_spin_velocity = 50
         self.body.setPosition(self.initial_position)
         self.body.setQuaternion(self.initial_quaternion)
         self.body.setLinearVel(0, 0, 0)
-        self.body.setAngularVel(0, 0, initial_spin_velocity)
+        self.body.setAngularVel(0, 0, self.initial_spin_velocity)
         self.factor = 0
-        self.calculate_factor(initial_spin_velocity)
+        self.calculate_factor(self.initial_spin_velocity)
 
 
 class Controls:

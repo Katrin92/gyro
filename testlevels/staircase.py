@@ -1,6 +1,7 @@
 from level import Level
 from plate import Plate
 from obstacle import Obstacle
+from accelerator import Accelerator
 
 import math
 
@@ -19,6 +20,7 @@ class Staircase(Level):
                           -0.3 + z * 0.5,  3,  3)
             self.objects.append(plate)
         self.objects.append(Plate(-10, 5, 9, 5, 5))
+        self.objects.append(Accelerator(14, 0, 4.5))
 
     def _init_obstacles(self):
         for z in range(9):

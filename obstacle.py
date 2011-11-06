@@ -9,7 +9,7 @@ class Obstacle:
         self.model.setPos(x, y, z)
         self.model.setHpr(0, 0, 0)
         self.model.setColor(0.9, 0.9, 0.9, 1)
-        self.model.setTexture(loader.loadTexture('texture.png'))
+        self.model.setTexture(loader.loadTexture('textures/texture.png'))
 
     def enable_physics(self, physics):
 

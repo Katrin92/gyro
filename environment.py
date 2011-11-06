@@ -1,4 +1,4 @@
-from panda3d.core import Spotlight, AmbientLight, VBase4
+from panda3d.core import Spotlight, AmbientLight, VBase4, BitMask32
 from pandac.PandaModules import CardMaker
 
 class Environment:
@@ -12,7 +12,7 @@ class Environment:
         self.sky = loader.loadModel("sky")
         self.sky.setScale(10)
         self.sky.reparentTo(render)
-        self.sky.setTexture(loader.loadTexture('gradient.png'))
+        self.sky.setTexture(loader.loadTexture('textures/gradient.png'))
         self.sky.setBin('background', 0)
         self.sky.setDepthWrite(False)
         self.sky.setShaderOff()
@@ -28,6 +28,7 @@ class Environment:
         self.spotlight.node().setScene(render)
         self.spotlight.node().setColor(VBase4(0.8, 0.8, 0.8, 1))
         self.spotlight.node().setShadowCaster(True, 1024, 1024)
+        self.spotlight.node().setCameraMask(BitMask32(0x2))
         self.spotlight.node().getLens().setNearFar(1, 50)
         self.spotlight.node().getLens().setFov(20)
         render.setLight(self.spotlight)
