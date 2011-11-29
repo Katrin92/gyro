@@ -4,7 +4,7 @@ class Obstacle:
 
     def __init__(self, x, y, z):
 
-        self.model = loader.loadModel("cube")
+        self.model = loader.loadModel("models/cube")
         self.model.reparentTo(render)
         self.model.setPos(x, y, z)
         self.model.setHpr(0, 0, 0)

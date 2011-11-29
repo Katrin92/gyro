@@ -5,14 +5,14 @@ class Accelerator:
 
     def __init__(self, x, y, z):
 
-        self.model = loader.loadModel("circle")
+        self.model = loader.loadModel("models/circle")
         self.model.reparentTo(render)
         self.model.setPos(x, y, z)
         self.model.setHpr(0, 0, 0)
         self.model.setColor(1, 1, 1, 1)
         self.model.setTexture(loader.loadTexture('textures/spiral.png'))
 
-        self.glow = loader.loadModel("tube")
+        self.glow = loader.loadModel("models/tube")
         self.glow.reparentTo(render)
         self.glow.setShaderOff()
         self.glow.setLightOff()

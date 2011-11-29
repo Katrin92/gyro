@@ -9,7 +9,7 @@ class Environment:
         self._init_spotlight()
 
     def _init_sky(self):
-        self.sky = loader.loadModel("sky")
+        self.sky = loader.loadModel("models/sky")
         self.sky.setScale(10)
         self.sky.reparentTo(render)
         self.sky.setTexture(loader.loadTexture('textures/gradient.png'))

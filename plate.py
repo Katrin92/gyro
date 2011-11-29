@@ -4,7 +4,7 @@ class Plate:
 
     def __init__(self, x, y, z, width, height):
 
-        self.model = loader.loadModel("cube")
+        self.model = loader.loadModel("models/cube")
         self.model.reparentTo(render)
         self.model.setScale(width, height, 0.2)
         self.model.setPos(x, y, z)

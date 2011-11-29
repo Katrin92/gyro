@@ -14,7 +14,7 @@ class Player:
         self.level = level
 
     def _init_model(self):
-        self.model = loader.loadModel("test")
+        self.model = loader.loadModel("models/gyro")
         self.model.reparentTo(render)
         self.model.setPos(0, 0, 2)
         self.model.setHpr(0, 0, 0)
@@ -35,7 +35,7 @@ class Player:
         mass.setCylinder(10, 2, 1.2, 0.2)
         self.body.setMass(mass)
 
-        modelTrimesh = OdeTriMeshData(loader.loadModel("test"), True)
+        modelTrimesh = OdeTriMeshData(loader.loadModel("models/gyro-low"), True)
         self.geom = OdeTriMeshGeom(physics.space, modelTrimesh)
         self.geom.setBody(self.body)
 
